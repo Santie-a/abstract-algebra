@@ -1,0 +1,106 @@
+const r = String.raw;
+
+export default {
+  id: 'acciones',
+  title: 'Acciones de grupos',
+  section: 'Secciones 6.1–6.2',
+  keyIdeas: [
+    r`Una **acción** $G\acts X$ es una función $G\times X\to X$, $(g,x)\mapsto g\cdot x$, con $1\cdot x = x$ y $g_1\cdot(g_2\cdot x) = (g_1g_2)\cdot x$ (Definición 6.1).`,
+    r`Acciones de $G$ en $X$ $\leftrightarrow$ homomorfismos $\rho: G\to S_X$ (Proposición 6.18). El **kernel** de la acción es $\{g\in G\mid g\cdot x = x\ \text{para toda}\ x\}$; la acción es **fiel** si es trivial.`,
+    r`**Estabilizador**: $G_x = \{g\in G\mid g\cdot x = x\}\le G$. **Órbita**: $\Orb_x = \{g\cdot x\mid g\in G\}$. Las órbitas forman una partición de $X$.`,
+    r`**Órbita–estabilizador** (Lema 6.31): $|\Orb_x| = |G : G_x|$.`,
+    r`Para la conjugación $g\cdot h = ghg^{-1}$ el kernel es $Z(G)$; para $g\cdot A = gAg^{-1}$ sobre subconjuntos, el estabilizador de $A$ es $N_G(A)$.`,
+  ],
+  questions: [
+    {
+      id: 'ac-01',
+      type: 'multi',
+      prompt: r`Sea $G$ un grupo **no abeliano**. ¿Cuáles de las siguientes reglas definen una acción (a izquierda) de $G$ sobre sí mismo?`,
+      options: [
+        { text: r`$g\cdot h = gh$`, correct: true, why: r`Acción regular izquierda (Ejemplo 6.5).` },
+        { text: r`$g\cdot h = ghg^{-1}$`, correct: true, why: r`Acción por conjugación (Ejemplo 6.6).` },
+        { text: r`$g\cdot h = hg^{-1}$`, correct: true, why: r`$g_1\cdot(g_2\cdot h) = hg_2^{-1}g_1^{-1} = h(g_1g_2)^{-1} = (g_1g_2)\cdot h$.` },
+        { text: r`$g\cdot h = hg$`, why: r`$g_1\cdot(g_2\cdot h) = hg_2g_1$, mientras que $(g_1g_2)\cdot h = hg_1g_2$. Es una acción a **derecha**.` },
+        { text: r`$g\cdot h = g^{-1}hg$`, why: r`$g_1\cdot(g_2\cdot h) = (g_2g_1)^{-1}h(g_2g_1) = (g_2g_1)\cdot h$, que en general no es $(g_1g_2)\cdot h$.` },
+      ],
+      explanation: r`Hay que verificar $1\cdot h = h$ (todas lo cumplen) y $g_1\cdot(g_2\cdot h) = (g_1g_2)\cdot h$. Las reglas que "multiplican por la derecha" sin invertir invierten el orden de $g_1$ y $g_2$, así que fallan en grupos no abelianos (Problemas 6.10 y 6.11). Invertir, como en $hg^{-1}$, corrige el orden (Ejercicio 6.16).`,
+      ref: 'Definición 6.1',
+    },
+    {
+      id: 'ac-02',
+      type: 'mcq',
+      prompt: r`¿Cuál es el kernel de la acción de $G$ sobre sí mismo por conjugación, $g\cdot h = ghg^{-1}$?`,
+      options: [
+        { text: r`$Z(G)$`, correct: true },
+        { text: r`$\{1\}$`, why: r`Sólo cuando $Z(G) = 1$; por ejemplo, si $G$ es abeliano y no trivial, el kernel es todo $G$.` },
+        { text: r`$G$`, why: r`Sólo cuando $G$ es abeliano.` },
+        { text: r`$N_G(G)$`, why: r`$N_G(G) = G$ siempre.` },
+      ],
+      explanation: r`$g$ está en el kernel si y sólo si $ghg^{-1} = h$ para toda $h\in G$, es decir, si $g$ conmuta con todo $G$: $g\in Z(G)$. En particular, la acción por conjugación es fiel exactamente cuando $Z(G) = 1$.`,
+      ref: 'Ejemplo 6.26',
+    },
+    {
+      id: 'ac-03',
+      type: 'fill',
+      prompt: r`Complete la demostración de que el estabilizador $G_x = \{g\in G\mid g\cdot x = x\}$ es un subgrupo de $G$.`,
+      template: r`- $1\in G_x$ porque [[0]], por el primer axioma de acción.
+      - Si $g_1, g_2\in G_x$: $(g_1g_2)\cdot x = g_1\cdot\big($[[1]]$\big) = g_1\cdot x = x$.
+      - Si $g_1\in G_x$: $g_1^{-1}\cdot x = g_1^{-1}\cdot\big($[[2]]$\big) = \big($[[3]]$\big)\cdot x = 1\cdot x = x$.`,
+      blanks: [r`$1\cdot x = x$`, r`$g_2\cdot x$`, r`$g_1\cdot x$`, r`$g_1^{-1}g_1$`],
+      distractors: [r`$x\cdot 1 = x$`, r`$g_1g_2$`, r`$g_2g_1$`, r`$g_2^{-1}\cdot x$`],
+      explanation: r`Los tres puntos usan sólo los axiomas: $1\cdot x = x$ y $g_1\cdot(g_2\cdot x) = (g_1g_2)\cdot x$. Para el inverso se reemplaza $x$ por $g_1\cdot x$ (válido porque $g_1\in G_x$) y se aplica el segundo axioma.`,
+      ref: 'Definición 6.27',
+    },
+    {
+      id: 'ac-04',
+      type: 'numeric',
+      prompt: r`$S_4$ actúa sobre los subconjuntos de dos elementos de $\{1,2,3,4\}$ mediante $\sigma\cdot\{a,b\} = \{\sigma(a),\sigma(b)\}$. El estabilizador de $\{1,3\}$ es $\{1, (1\,3), (2\,4), (1\,3)(2\,4)\}$. ¿Cuántos elementos tiene la órbita de $\{1,3\}$?`,
+      answer: 6,
+      explanation: r`Por el Lema 6.31, $|\Orb_{\{1,3\}}| = |S_4 : G_{\{1,3\}}| = 24/4 = 6$. Como hay exactamente $\binom42 = 6$ subconjuntos de dos elementos, la acción es transitiva.`,
+      ref: 'Ejemplo 6.29',
+    },
+    {
+      id: 'ac-05',
+      type: 'numeric',
+      prompt: r`$D_8$ actúa sobre los vértices $\{1,2,3,4\}$ del cuadrado. ¿Cuál es el orden del estabilizador $(D_8)_x$ de un vértice $x$?`,
+      answer: 2,
+      explanation: r`Las rotaciones llevan cualquier vértice a cualquier otro, así que la órbita de $x$ tiene $4$ elementos. Por el Lema 6.31, $|(D_8)_x| = |D_8|/|\Orb_x| = 8/4 = 2$. Explícitamente $(D_8)_x = \{1, s_x\}$, donde $s_x$ es la reflexión por la recta que pasa por $x$ y el centro.`,
+      ref: 'Ejemplo 6.60',
+    },
+    {
+      id: 'ac-06',
+      type: 'numeric',
+      prompt: r`Sea $\sigma = (1\,3\,5\,9)(2\,8\,6)\in S_9$ y considere la acción de $\langle\sigma\rangle$ sobre $\{1,2,\dots,9\}$. ¿Cuántas órbitas tiene esta acción?`,
+      answer: 4,
+      explanation: r`La órbita de $i$ es $\{\sigma^k(i)\mid k\in\Z\}$: exactamente los elementos del ciclo que contiene a $i$ (Sección 6.2). Las órbitas son $\{1,3,5,9\}$, $\{2,8,6\}$, $\{4\}$ y $\{7\}$: los puntos fijos forman órbitas de un elemento. Son $4$.`,
+      intuition: r`La descomposición en ciclos disjuntos **es** la partición en órbitas de $\langle\sigma\rangle$.`,
+      ref: 'Sección 6.2',
+    },
+    {
+      id: 'ac-07',
+      type: 'mcq',
+      prompt: r`Una acción $G\acts X$, con representación $\rho: G\to S_X$, se dice **fiel** cuando:`,
+      options: [
+        { text: r`$\ker\rho = 1$, es decir, $\rho$ es inyectiva`, correct: true },
+        { text: r`hay una sola órbita`, why: r`Eso es ser **transitiva** (Definición 6.32).` },
+        { text: r`todo $x\in X$ tiene estabilizador trivial`, why: r`Es más fuerte. $S_3\acts\{1,2,3\}$ es fiel, pero $G_1 = \langle(2\,3)\rangle\neq 1$.` },
+        { text: r`$\rho$ es sobreyectiva` },
+      ],
+      explanation: r`Definición 6.24: la acción es fiel si su kernel $\bigcap_{x\in X}G_x$ es trivial. En ese caso $G$ es isomorfo a un subgrupo de $S_X$.`,
+      ref: 'Definición 6.24',
+    },
+    {
+      id: 'ac-08',
+      type: 'mcq',
+      prompt: r`$G$ actúa sobre el conjunto de sus subconjuntos mediante $g\cdot A = gAg^{-1}$. ¿Cuál es el estabilizador de $A$?`,
+      options: [
+        { text: r`$N_G(A)$`, correct: true },
+        { text: r`$C_G(A)$`, why: r`$C_G(A)$ es el kernel de la acción de $N_G(A)$ sobre $A$ por conjugación; pide $gag^{-1} = a$ para **cada** $a$.` },
+        { text: r`$Z(G)$`, why: r`$Z(G)$ está contenido en el estabilizador, pero en general es más pequeño.` },
+        { text: r`$A$`, why: r`$A$ ni siquiera tiene por qué ser un subgrupo.` },
+      ],
+      explanation: r`$G_A = \{g\in G\mid gAg^{-1} = A\} = N_G(A)$. Por el Lema 6.31, el número de conjugados de $A$ es $|G : N_G(A)|$.`,
+      ref: 'Sección 6.1',
+    },
+  ],
+};

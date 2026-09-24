@@ -1,0 +1,17 @@
+{
+  "name": "plataforma-algebra-abstracta",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plataforma didáctica estática para estudiar álgebra abstracta (grupos cocientes, acciones y Sylow).",
+  "type": "module",
+  "scripts": {
+    "vendor": "node scripts/vendor-katex.mjs",
+    "test": "node tests/validate-content.mjs",
+    "serve": "python3 -m http.server 8080",
+    "test:e2e": "node tests/e2e.mjs"
+  },
+  "devDependencies": {
+    "katex": "0.16.47",
+    "playwright-core": "^1.55.0"
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Álgebra Abstracta · Práctica</title>
+    <meta name="description" content="Plataforma de práctica para Álgebra Abstracta: grupos cocientes, teoremas de isomorfismo, acciones de grupos y teoremas de Sylow." />
+    <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131417" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Álgebra" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/icon-192.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="vendor/katex/katex.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <script>
+      // Aplica el tema guardado antes de pintar para evitar parpadeos.
+      try {
+        var t = JSON.parse(localStorage.getItem('aa:theme'));
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <script type="module" src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div id="app"><div class="boot" role="status">Cargando…</div></div>
+    <div id="live" class="sr-only" aria-live="polite"></div>
+    <noscript><p class="boot">Esta plataforma necesita JavaScript para funcionar.</p></noscript>
+  </body>
+</html>
